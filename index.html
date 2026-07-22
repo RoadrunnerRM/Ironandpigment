@@ -535,7 +535,16 @@
       `Name: ${name}\nEmail: ${email}\n\nFaction/Army: ${faction}\nModel Count: ${count}\nService Tier: ${tier}\n\nProject Details:\n${details}`
     );
 
-    window.location.href = `mailto:ironandpigment@gmail.com?subject=${subject}&body=${body}`;
+    fetch("https://ironandpigmentemailservice.onrender.com/send", {
+      method: "POST",
+      body: JSON.stringify({
+        "subject": subject,
+        "html": body
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
 
     // Show success
     document.getElementById('formInner').classList.add('hidden');
